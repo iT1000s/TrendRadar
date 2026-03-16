@@ -77,7 +77,7 @@ DINGTALK_WEBHOOK_URL=
 
 # ──── 运行配置 ────
 # 每30分钟抓取一次
-CRON_SCHEDULE=*/30 * * * *
+CRON_SCHEDULE="*/30 * * * *"
 RUN_MODE=cron
 IMMEDIATE_RUN=true
 
