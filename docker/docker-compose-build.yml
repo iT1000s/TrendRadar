@@ -12,6 +12,8 @@ services:
     volumes:
       - ../config:/app/config:ro
       - ../output:/app/output
+      - ../docs:/app/output/docs:ro
+      - ../index.html:/app/output/index.html:ro
 
     environment:
       - TZ=Asia/Shanghai
