@@ -264,6 +264,16 @@ def _load_ai_config(config_data: Dict) -> Dict:
 
     timeout_env = _get_env_int_or_none("AI_TIMEOUT")
 
+    # 解析 AI_EXTRA_PARAMS 环境变量（JSON 格式）
+    extra_params = ai_config.get("extra_params", {})
+    extra_params_env = os.environ.get("AI_EXTRA_PARAMS", "").strip()
+    if extra_params_env:
+        import json
+        try:
+            extra_params = json.loads(extra_params_env)
+        except json.JSONDecodeError:
+            print(f"[警告] AI_EXTRA_PARAMS 环境变量格式错误，应为 JSON 格式: {extra_params_env}")
+
     return {
         # LiteLLM 核心配置
         "MODEL": _get_env_str("AI_MODEL") or ai_config.get("model", ""),
@@ -278,7 +288,7 @@ def _load_ai_config(config_data: Dict) -> Dict:
         # LiteLLM 高级选项
         "NUM_RETRIES": ai_config.get("num_retries", 2),
         "FALLBACK_MODELS": ai_config.get("fallback_models", []),
-        "EXTRA_PARAMS": ai_config.get("extra_params", {}),
+        "EXTRA_PARAMS": extra_params,
     }
 
 

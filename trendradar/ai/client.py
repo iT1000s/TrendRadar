@@ -38,6 +38,7 @@ class AIClient:
         self.timeout = config.get("TIMEOUT", 120)
         self.num_retries = config.get("NUM_RETRIES", 2)
         self.fallback_models = config.get("FALLBACK_MODELS", [])
+        self.extra_params = config.get("EXTRA_PARAMS", {})
 
     def chat(
         self,
@@ -87,6 +88,10 @@ class AIClient:
         for key, value in kwargs.items():
             if key not in params:
                 params[key] = value
+
+        # 添加额外参数（如 stream: false 等中转站所需参数）
+        if self.extra_params:
+            params["extra_body"] = {**self.extra_params, **params.get("extra_body", {})}
 
         # 调用 LiteLLM
         response = completion(**params)
