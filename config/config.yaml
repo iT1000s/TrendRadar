@@ -2083,11 +2083,11 @@ ai:
   # 完整列表: https://docs.litellm.ai/docs/providers
   # 如果你对于看英文文档比较头疼，那么可以点击页面右下角的 【Ask AI】 ,用中文询问怎么配置 
   
-  model: "openai/grok-4-1-fast"         # 使用 openai/ 前缀透传原始模型名到中转站
+  model: ""                             # 通过环境变量 AI_MODEL 配置（如 openai/grok-4-1-fast）
 
-  api_key: "ah-20d416c7f8349ab37ec6911e4650266766922cc4e98afc9ee89fa421268672a4"
+  api_key: ""                           # 通过环境变量 AI_API_KEY 配置
 
-  api_base: "https://axonhub.doneit.ccwu.cc/v1"
+  api_base: ""                          # 通过环境变量 AI_API_BASE 配置（如 https://openrouter.ai/api/v1）
                                     # 💡 超级重要：连接任意兼容 OpenAI 协议的模型商
                                     # 如果你使用的模型商不在上述支持列表中，但提供了兼容 OpenAI 的接口：
                                     #
